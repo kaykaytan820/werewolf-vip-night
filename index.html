@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>狼人杀 VIP 之夜｜隐藏任务</title>
+<style>
+:root{--bg:#090a0e;--card:#14161d;--card2:#1b1e27;--text:#f7f2e8;--muted:#b8b3aa;--gold:#d7b56d;--red:#a82f36;--line:#34303a}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:
+radial-gradient(circle at 50% 0%,#2a1820 0,#111218 36%,#08090d 78%);
+color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+display:flex;justify-content:center;padding:24px 16px 48px}
+.wrap{width:min(100%,560px)}
+.brand{text-align:center;margin:18px 0 20px}
+.moon{font-size:42px;filter:grayscale(.25)}
+h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:2px;margin:8px 0 4px;font-size:30px}
+.sub{color:var(--gold);letter-spacing:4px;font-size:12px;font-weight:700}
+.card{background:linear-gradient(180deg,rgba(27,30,39,.96),rgba(17,19,25,.98));border:1px solid var(--line);
+border-radius:20px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.35)}
+.intro{text-align:center;font-size:16px;line-height:1.75;margin:0 0 18px}
+.rules{display:grid;gap:12px;margin:18px 0}
+.rule{background:#101218;border:1px solid #292c35;border-radius:14px;padding:13px 14px;line-height:1.55;color:#e7e1d7}
+.rule b{color:var(--gold)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.55;margin:22px 0}
+label{display:block;color:var(--gold);font-weight:700;margin-bottom:9px}
+.code-row{display:flex;gap:10px}
+input{flex:1;min-width:0;background:#090b10;border:1px solid #45414a;color:white;border-radius:12px;padding:15px 14px;
+font-size:20px;letter-spacing:6px;text-align:center;outline:none}
+input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(215,181,109,.12)}
+button{border:0;border-radius:12px;padding:0 18px;background:linear-gradient(180deg,#dfc17e,#b88d42);color:#17120a;
+font-weight:800;font-size:15px;cursor:pointer}
+.error{min-height:22px;color:#e98686;text-align:center;margin-top:10px;font-size:14px}
+.footer{text-align:center;color:#77747c;font-size:12px;margin-top:18px}
+#missionPage{display:none}
+.name{text-align:center;color:var(--muted);margin-bottom:7px;font-size:14px}
+.mission-title{text-align:center;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:25px;margin:0 0 20px}
+.section-title{font-size:13px;letter-spacing:2px;color:var(--gold);font-weight:800;margin:18px 0 9px}
+.content{line-height:1.75;font-size:16px}
+.proof{background:#0e1116;border-left:3px solid var(--gold);padding:14px 15px;border-radius:8px;line-height:1.7}
+.warning{text-align:center;color:#c7bba7;font-size:13px;line-height:1.6;margin-top:20px}
+.back{width:100%;height:48px;margin-top:20px;background:transparent;color:var(--gold);border:1px solid #6c5937}
+@media(max-width:380px){h1{font-size:25px}.card{padding:18px}.code-row{flex-direction:column}button{height:48px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <div class="moon">🐺</div>
+    <h1>狼人杀 VIP 之夜</h1>
+    <div class="sub">SECRET MISSION</div>
+  </div>
+
+  <section id="homePage" class="card">
+    <p class="intro">欢迎来到狼人杀 VIP 之夜！<br>今晚除了狼人杀，每位玩家还有一个只属于你的<strong>隐藏任务</strong>。</p>
+    <div class="rules">
+      <div class="rule">🔐 输入 Kay 提前发给你的 <b>4 位个人专属码</b>，查看你的任务。</div>
+      <div class="rule">🤫 <b>任务必须保密。</b>不要向其他玩家展示任务页面或透露任务内容。</div>
+      <div class="rule">🎭 在不被其他玩家发现的情况下完成任务。</div>
+      <div class="rule">⏳ 隐藏任务将在 <b>三局狼人杀后</b>结束并统一揭晓。</div>
+      <div class="rule">🎁 成功完成任务，可获得 <b>额外 1 次抽奖机会</b>。</div>
+    </div>
+    <div class="divider"></div>
+    <label for="code">输入个人专属码</label>
+    <div class="code-row">
+      <input id="code" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••" aria-label="4位个人专属码">
+      <button onclick="unlock()">查看任务</button>
+    </div>
+    <div id="error" class="error"></div>
+  </section>
+
+  <section id="missionPage" class="card">
+    <div id="playerName" class="name"></div>
+    <h2 id="missionTitle" class="mission-title"></h2>
+    <div class="section-title">YOUR MISSION · 你的任务</div>
+    <div id="missionText" class="content"></div>
+    <div class="section-title">PROOF · 验证方法</div>
+    <div id="proofText" class="proof"></div>
+    <div class="warning">⚠️ 请记住你的任务，不要把这个页面展示给其他玩家。</div>
+    <button class="back" onclick="goHome()">← 返回隐藏任务规则</button>
+  </section>
+
+  <div class="footer">狼人杀 VIP 之夜 · Keep your mission secret.</div>
+</div>
+<script src="missions.js"></script>
+<script>
+const input = document.getElementById('code');
+input.addEventListener('input', e => e.target.value = e.target.value.replace(/\D/g,'').slice(0,4));
+input.addEventListener('keydown', e => { if(e.key === 'Enter') unlock(); });
+
+function unlock(){
+  const code = input.value.trim();
+  const m = missions[code];
+  if(!m){
+    document.getElementById('error').textContent = '专属码不正确，请重新输入。';
+    return;
+  }
+  document.getElementById('error').textContent = '';
+  document.getElementById('playerName').textContent = m.name + ' · 专属隐藏任务';
+  document.getElementById('missionTitle').textContent = m.title;
+  document.getElementById('missionText').innerHTML = m.task;
+  document.getElementById('proofText').innerHTML = m.proof;
+  document.getElementById('homePage').style.display = 'none';
+  document.getElementById('missionPage').style.display = 'block';
+  input.value = '';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goHome(){
+  document.getElementById('missionPage').style.display = 'none';
+  document.getElementById('homePage').style.display = 'block';
+  document.getElementById('error').textContent = '';
+  input.value = '';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
