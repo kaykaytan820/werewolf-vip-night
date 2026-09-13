@@ -49,9 +49,9 @@ const missions = {
   },
   "3765": {
     "name": "Yan",
-    "title": "🤜 默契碰拳",
-    "task": "在游戏的任何阶段，成功让 <strong>3位不同玩家</strong>主动跟你击掌或碰拳。<br><br>\n不能直接要求或告诉对方跟你击掌/碰拳。",
-    "proof": "隐藏任务揭晓时，由 <strong>3位当事人</strong>现场认证。"
+    "title": "👏 掌声鼓励",
+    "task": "在接下来的 <strong>每一局游戏中</strong>，至少 <strong>2次</strong>在其他玩家发言后，自然地为TA鼓掌。<br><br>\n三局都完成才算任务成功。<br><br>\n不能让其他玩家发现你在刻意完成任务。",
+    "proof": "隐藏任务揭晓时，由被你鼓掌的当事人现场认证。"
   },
   "6917": {
     "name": "小Michael",
